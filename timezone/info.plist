@@ -73,7 +73,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>python alfred-workflow/timezone/timezone.py "{query}"</string>
+				<string>PYTHONPATH=alfred-workflow python alfred-workflow/timezone/timezone.py "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>

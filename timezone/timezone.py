@@ -2,6 +2,8 @@ import json
 import sys
 import re
 from datetime import datetime, timedelta
+from utils.date_time import *
+from alfread import *
 
 CITIES = {
     "shanghai": {
@@ -30,7 +32,7 @@ def get_target_city():
         found_city = False
         city_found = DEFAULT_TARGET_CITY
         for c in CITIES.keys():
-            if c.startswith(city_start_str):
+            if c.startswith(city_start_str.lower()):
                 city_found = c
                 found_city = True
         
@@ -38,25 +40,6 @@ def get_target_city():
             target_city = city_found
     
     return target_city
-
-def format_time_to_obj(time_str):
-    ''' Format time to datatime object '''
-    try:
-        return datetime.strptime(time_str, '%Y-%m-%d %H:%M')
-    except:
-        return None
-
-def get_current_time(format):
-    ''' get current time string in format '''
-
-    return convert_time_by_format(format, datetime.now())
-
-def convert_time_by_format(format, time_obj):
-    ''' format datetime obbject to string according to format specified '''
-    try:
-        return datetime.strftime(time_obj, format)
-    except:
-        return None
 
 def get_timezone_list(current_time, target_city):
     # current_time = get_current_time(TIME_FORMAT)
