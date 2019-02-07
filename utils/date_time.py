@@ -3,6 +3,7 @@ import sys
 import re
 from datetime import datetime, timedelta
 
+# refer to https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
 def format_time_to_obj(time_str):
     ''' Format time to datatime object '''
     try:
