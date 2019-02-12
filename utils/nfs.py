@@ -1,14 +1,11 @@
 import re
 from .strings import extractByRegex
 
-RE_PR = r'(\d{7})'
+RE_PR = r'\b(\d{7})\b'
 RE_PR_COMMENT = r'(\d{7})\#c(\d+)'
 PR_HTTP_PREFIX = 'https://bugzilla.eng.vmware.com/'
 
 def get_pr_number(text):
-    if text.startswith('http') and not text.startswith(PR_HTTP_PREFIX):
-        return None, None
-
     pr_info = extractByRegex(RE_PR_COMMENT, text)
     if pr_info:
         return pr_info
