@@ -1,4 +1,5 @@
 import re
+import subprocess
 
 def extractByRegex(expression, text):
     ''' Extract subtext from input text according to regex expression passed in
@@ -16,3 +17,22 @@ def extractByRegex(expression, text):
         # return a single string if only one group
         return reMatch.group(1)
     return None
+
+def convert_to_html_anchor(link, text):
+    '''convert a link to html anchor'''
+    return '<a href=\"{0}\">{1}</a>'.format(link, text)
+
+def transform_to_RTF(html):
+    p = subprocess.Popen(['textutil','-format','html','-convert','rtf','-stdin','-stdout'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    p.stdin.write(html)
+    p.stdin.close()
+    retcode = p.wait()
+    data = p.stdout.read()
+    return data
+
+def set_clipboard_data(data):
+    ''' copy data to clipboard '''
+    p = subprocess.Popen(['pbcopy','Prefer','rtf'], stdin=subprocess.PIPE)
+    p.stdin.write(data)
+    p.stdin.close()
+    retcode = p.wait()

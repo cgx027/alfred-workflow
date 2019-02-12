@@ -5,24 +5,35 @@ from utils.alfred import *
 from utils.strings import *
 from utils.input_output import *
 from utils.pr import *
+import subprocess
 
 def pr_handler(link):
-    pr_links = []
+    pr_links = ()
 
-    pr_num = get_pr_number(link)
-    wiki_link = '[{0} {1}]'. format(get_url_from_number(pr_num), 'PR {}'.format(pr_num))
+    pr_num, comment_num = get_pr_number(link)
     if pr_num:
-        pr_url = get_url_from_number(pr_num)
+        pr_url = get_url_from_number(pr_num, comment_num)
+        if comment_num:
+            wiki_link = '[{0} PR {1}#{2}]'.format(pr_url, pr_num, comment_num)
+            short_desc = 'PR {0}#c{1}'.format(pr_num, comment_num)
+        else:
+            wiki_link = '[{0} PR {1}]'.format(pr_url, pr_num)
+            short_desc = 'PR {0}'.format(pr_num)
         pr_links = (
             {
                 "title": pr_url,
-                "subtitle": "url",
+                "subtitle": "full url",
                 "arg": pr_url
             },
             {
                 "title": wiki_link,
                 "subtitle": "wiki link",
                 "arg": wiki_link
+            },
+            {
+                "title": short_desc,
+                "subtitle": "short description",
+                "arg": short_desc
             }
     )
 
@@ -44,6 +55,7 @@ def item_composer(item):
         item.get('icon', "icon.png")
     )
 
+#pass in an anchor <a href="protocol://url/to/thing">Name</a>
 LINK_HANDLERS = [
     pr_handler
 ]
