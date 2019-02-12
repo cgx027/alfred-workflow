@@ -24,7 +24,7 @@ def convert_to_html_anchor(link, text):
 
 def transform_to_RTF(html):
     p = subprocess.Popen(['textutil','-format','html','-convert','rtf','-stdin','-stdout'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-    p.stdin.write(html)
+    p.stdin.write(html.encode('utf-8'))
     p.stdin.close()
     retcode = p.wait()
     data = p.stdout.read()

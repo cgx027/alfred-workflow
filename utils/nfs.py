@@ -1,29 +1,62 @@
+import os
 import re
 from .strings import extractByRegex
 
-RE_PR = r'\b(\d{7})\b'
-RE_PR_COMMENT = r'(\d{7})\#c(\d+)'
-PR_HTTP_PREFIX = 'https://bugzilla.eng.vmware.com/'
+NFS_HTTP_PREFIX = 'http://prme-vsanhol-observer-10.eng.vmware.com/vsanhol-nfs-vm/'
+LOG_PATTERN = r'(.*VMWB-[A-Za-z0-9]{3}-4-VSANI-OCERT_\d+)'
 
-def get_pr_number(text):
-    pr_info = extractByRegex(RE_PR_COMMENT, text)
-    if pr_info:
-        return pr_info
+def get_cert_base_link(text):
+    if 'http' in text and not text.startswith(NFS_HTTP_PREFIX):
+        return None
+    return extractByRegex(LOG_PATTERN, text)
 
-    pr_num = extractByRegex(RE_PR, text)
-    if pr_num:
-        return pr_num, None
-    return None, None
+def nfs_get_text_from_link(link):
+    if link.endswith('testdata.json'):
+        return 'testdata.json'
+    if link.endswith('testsummary.html'):
+        return 'testsummary.html'
+    if link.endswith('wiki.txt'):
+        return 'wiki.txt'
+    else:
+        return os.path.basename(link)
 
-def get_url_from_number(pr_num, comment_num):
-    if comment_num:
-        return '{0}show_bug.cgi?id={1}#c{2}'.format(PR_HTTP_PREFIX, pr_num, comment_num)
-    return '{0}show_bug.cgi?id={1}'.format(PR_HTTP_PREFIX, pr_num)
+def nfs_handler(link):
+    nfs_links = ()
+    cert_log_path = get_cert_base_link(link)
 
-def pr_get_text_from_link(link):
-    pr_num, comment_num = extractByRegex(RE_PR_COMMENT, link)
-    pr_num = extractByRegex(RE_PR, link)
-    # print(pr_num_with_comment, pr_num)
+    if cert_log_path:
+        test_data_path = os.path.join(cert_log_path, 'testdata.json')
+        test_summary_path = os.path.join(cert_log_path, 'testsummary.html')
+        wiki_txt_path = os.path.join(cert_log_path, 'wiki.txt')
 
-    pr_text = "PR {0}#c{1}".format(pr_num, comment_num) if comment_num else "PR {0}".format(pr_num) if pr_num else 'link'
-    return pr_text
+        test_summary_wiki_link = '[{0} testsummary.html]'.format(test_summary_path)
+
+        nfs_links = (
+            {
+                "title": test_summary_path,
+                "subtitle": "testsummary.html url",
+                "arg": test_summary_path
+            },
+            {
+                "title": cert_log_path,
+                "subtitle": "cert log base url",
+                "arg": cert_log_path
+            },
+            {
+                "title": test_data_path,
+                "subtitle": "testdata.json url",
+                "arg": test_data_path
+            },
+            {
+                "title": wiki_txt_path,
+                "subtitle": "wiki.txt url",
+                "arg": wiki_txt_path
+            },
+            {
+                "title": test_summary_wiki_link,
+                "subtitle": "testsummary.html wiki link",
+                "arg": test_summary_wiki_link
+            },
+        )
+    
+    return nfs_links

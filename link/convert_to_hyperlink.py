@@ -1,12 +1,20 @@
 from utils.strings import *
 from utils.input_output import *
 from utils.pr import *
+from utils.nfs import *
+from utils.confluence import *
 
 WIKI_PREFIX = "https://bugzilla.eng.vmware.com/"
+NFS_HTTP_PREFIX = 'http://prme-vsanhol-observer-10.eng.vmware.com/vsanhol-nfs-vm/'
+CONF_HTTP_PREFIX = 'https://confluence.eng.vmware.com/'
 
 def get_text_from_link(link):
     if link.startswith(WIKI_PREFIX):
         return pr_get_text_from_link(link)
+    if link.startswith(NFS_HTTP_PREFIX):
+        return nfs_get_text_from_link(link)
+    if link.startswith(CONF_HTTP_PREFIX):
+        return conf_get_text_from_link(link)
     else:
         return 'link'
 
@@ -17,6 +25,6 @@ if link.startswith('http'):
     link_rtf = transform_to_RTF(link_html)
     set_clipboard_data(link_rtf)
 else:
-    set_clipboard_data(link)
+    set_clipboard_data(link.encode('utf-8'))
 # print(link, link_html, link_rtf)
 # print(link_rtf)

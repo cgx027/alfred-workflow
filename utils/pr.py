@@ -6,7 +6,7 @@ RE_PR_COMMENT = r'(\d{7})\#c(\d+)'
 PR_HTTP_PREFIX = 'https://bugzilla.eng.vmware.com/'
 
 def get_pr_number(text):
-    if text.startswith('http') and not text.startswith(PR_HTTP_PREFIX):
+    if 'http' in text and not text.startswith(PR_HTTP_PREFIX):
         return None, None
 
     pr_info = extractByRegex(RE_PR_COMMENT, text)
@@ -30,3 +30,35 @@ def pr_get_text_from_link(link):
 
     pr_text = "PR {0}#c{1}".format(pr_num, comment_num) if comment_num else "PR {0}".format(pr_num) if pr_num else 'link'
     return pr_text
+
+def pr_handler(link):
+    pr_links = ()
+
+    pr_num, comment_num = get_pr_number(link)
+    if pr_num:
+        pr_url = get_url_from_number(pr_num, comment_num)
+        if comment_num:
+            wiki_link = '[{0} PR {1}#{2}]'.format(pr_url, pr_num, comment_num)
+            short_desc = 'PR {0}#c{1}'.format(pr_num, comment_num)
+        else:
+            wiki_link = '[{0} PR {1}]'.format(pr_url, pr_num)
+            short_desc = 'PR {0}'.format(pr_num)
+        pr_links = (
+            {
+                "title": pr_url,
+                "subtitle": "full url",
+                "arg": pr_url
+            },
+            {
+                "title": wiki_link,
+                "subtitle": "wiki link",
+                "arg": wiki_link
+            },
+            {
+                "title": short_desc,
+                "subtitle": "short description",
+                "arg": short_desc
+            }
+    )
+
+    return pr_links
