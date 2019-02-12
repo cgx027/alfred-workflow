@@ -3,7 +3,7 @@ import sys
 import re
 from datetime import datetime, timedelta
 from utils.date_time import *
-from alfread import *
+from utils.alfred import *
 
 CITIES = {
     "shanghai": {
