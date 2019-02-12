@@ -3,10 +3,12 @@ from utils.input_output import *
 from utils.pr import *
 from utils.nfs import *
 from utils.confluence import *
+from utils.wiki import *
 
 WIKI_PREFIX = "https://bugzilla.eng.vmware.com/"
 NFS_HTTP_PREFIX = 'http://prme-vsanhol-observer-10.eng.vmware.com/vsanhol-nfs-vm/'
 CONF_HTTP_PREFIX = 'https://confluence.eng.vmware.com/'
+WIKI_HTTP_PREFIX = 'https://wiki.eng.vmware.com/'
 
 def get_text_from_link(link):
     if link.startswith(WIKI_PREFIX):
@@ -15,6 +17,8 @@ def get_text_from_link(link):
         return nfs_get_text_from_link(link)
     if link.startswith(CONF_HTTP_PREFIX):
         return conf_get_text_from_link(link)
+    if link.startswith(WIKI_HTTP_PREFIX):
+        return wiki_get_text_from_link(link)
     else:
         return 'link'
 

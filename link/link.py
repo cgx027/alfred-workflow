@@ -7,6 +7,7 @@ from utils.input_output import *
 from utils.pr import *
 from utils.nfs import *
 from utils.confluence import *
+from utils.wiki import *
 import subprocess
 
 def process_handlers(link, handlers):
@@ -29,7 +30,8 @@ def item_composer(item):
 LINK_HANDLERS = [
     pr_handler,
     nfs_handler,
-    confluence_handler
+    confluence_handler,
+    wiki_handler
 ]
 
 # print(json.dumps(alfred_list, indent=4))
