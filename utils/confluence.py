@@ -42,7 +42,7 @@ def conf_get_text_from_link(link):
         return space
     return 'confluence link'
 
-def confluence_handler(link):
+def confluence_handler(link, text):
     confluence_links = ()
     space, title = get_space_title(link)
     # print(space, title)
@@ -54,17 +54,17 @@ def confluence_handler(link):
         confluence_links = (
             {
                 "title": link,
-                "subtitle": "page url",
+                "subtitle": "confluence page url",
                 "arg": link
             },
             {
                 "title": page_wiki_link,
-                "subtitle": "page wiki txt",
+                "subtitle": "confluence page wiki txt",
                 "arg": page_wiki_link
             },
             {
                 "title": space_link,
-                "subtitle": "space url",
+                "subtitle": "confluence space url",
                 "arg": space_link
             },
         )

@@ -3,17 +3,17 @@ import sys
 import re
 from utils.alfred import *
 from utils.strings import *
-from utils.input_output import *
+from utils.input_output import get_single_user_input, get_user_input_count
 from utils.pr import *
 from utils.nfs import *
 from utils.confluence import *
 from utils.wiki import *
-import subprocess
+from link.default import *
 
-def process_handlers(link, handlers):
+def process_handlers(link, text, handlers):
     items = []
     for handler in handlers:
-        items.extend(handler(link))
+        items.extend(handler(link, text))
 
     return items
 
@@ -31,11 +31,17 @@ LINK_HANDLERS = [
     pr_handler,
     nfs_handler,
     confluence_handler,
-    wiki_handler
+    wiki_handler,
+    default_handler
 ]
 
-# print(json.dumps(alfred_list, indent=4))
-link = get_single_user_input()
-list_items = process_handlers(link, LINK_HANDLERS)
-alfred_list = compose_alfred_list(list_items, item_composer)
-print(json.dumps(alfred_list))
+def run(query=''):
+    link = get_single_user_input(query=query, index=1)
+    text = get_single_user_input(query=query, index=2)
+    list_items = process_handlers(link, text, LINK_HANDLERS)
+    alfred_list = compose_alfred_list(list_items, item_composer)
+    print(json.dumps(alfred_list))
+    return alfred_list
+
+if __name__ == '__main__':
+    run()

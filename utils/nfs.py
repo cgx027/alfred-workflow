@@ -20,7 +20,7 @@ def nfs_get_text_from_link(link):
     else:
         return os.path.basename(link)
 
-def nfs_handler(link):
+def nfs_handler(link, text):
     nfs_links = ()
     cert_log_path = get_cert_base_link(link)
 

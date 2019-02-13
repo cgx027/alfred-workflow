@@ -11,13 +11,15 @@ from .strings import extractByRegex
 WIKI_HTTP_PREFIX = 'https://wiki.eng.vmware.com/'
 
 def get_wiki_page(text):
+    if not text.startswith(WIKI_HTTP_PREFIX):
+        return None
     text_decoded = unquote(text)
-    return os.path.basename(text).replace('_', ' ')
+    return os.path.basename(text_decoded).replace('_', ' ')
 
 def wiki_get_text_from_link(link):
     return get_wiki_page(link)
 
-def wiki_handler(link):
+def wiki_handler(link, text):
     wiki_links = ()
     wiki_page = get_wiki_page(link)
 
@@ -27,12 +29,12 @@ def wiki_handler(link):
         wiki_links = (
             {
                 "title": link,
-                "subtitle": "page url",
+                "subtitle": "wiki page url",
                 "arg": link
             },
             {
                 "title": page_wiki_link,
-                "subtitle": "page wiki txt",
+                "subtitle": "wiki page wiki txt",
                 "arg": page_wiki_link
             },
         )

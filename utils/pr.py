@@ -24,14 +24,18 @@ def get_url_from_number(pr_num, comment_num):
     return '{0}show_bug.cgi?id={1}'.format(PR_HTTP_PREFIX, pr_num)
 
 def pr_get_text_from_link(link):
-    pr_num, comment_num = extractByRegex(RE_PR_COMMENT, link)
-    pr_num = extractByRegex(RE_PR, link)
+    pr_info = extractByRegex(RE_PR_COMMENT, link)
+    if pr_info:
+        pr_num, comment_num = extractByRegex(RE_PR_COMMENT, link)
+    else:
+        pr_num = extractByRegex(RE_PR, link)
+        comment_num = None
     # print(pr_num_with_comment, pr_num)
 
     pr_text = "PR {0}#c{1}".format(pr_num, comment_num) if comment_num else "PR {0}".format(pr_num) if pr_num else 'link'
     return pr_text
 
-def pr_handler(link):
+def pr_handler(link, text):
     pr_links = ()
 
     pr_num, comment_num = get_pr_number(link)
@@ -46,17 +50,17 @@ def pr_handler(link):
         pr_links = (
             {
                 "title": pr_url,
-                "subtitle": "full url",
+                "subtitle": "full PR url",
                 "arg": pr_url
             },
             {
                 "title": wiki_link,
-                "subtitle": "wiki link",
+                "subtitle": "PR wiki link",
                 "arg": wiki_link
             },
             {
                 "title": short_desc,
-                "subtitle": "short description",
+                "subtitle": "PR short description",
                 "arg": short_desc
             }
     )
