@@ -6,11 +6,80 @@
 	<string>com.tedc.link</string>
 	<key>connections</key>
 	<dict>
+		<key>175FE4D0-C974-432F-BAD3-658564331216</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>44B74F2E-9673-4795-9A54-D9E85E5959AB</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>4D5EEAF1-DCFD-4B8B-A181-859BCC9CD58F</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4E9EA5E8-532D-4F04-9FC9-F26680BC3FF7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>4E9EA5E8-532D-4F04-9FC9-F26680BC3FF7</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>9A69BCA2-265A-429A-A320-A507550197CC</string>
+				<string>175FE4D0-C974-432F-BAD3-658564331216</string>
+				<key>modifiers</key>
+				<integer>1048576</integer>
+				<key>modifiersubtext</key>
+				<string>Copy url to clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>63C18D63-6A32-43F4-9722-F7D358EB62AC</string>
+				<key>modifiers</key>
+				<integer>131072</integer>
+				<key>modifiersubtext</key>
+				<string>Copy text</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>5B995BBC-3549-43AF-8E38-4BBFA23D9CC3</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string>Remove http domain and copy to clipboard</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>7608D257-7CB4-40D1-9B7C-19856F980843</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>5B995BBC-3549-43AF-8E38-4BBFA23D9CC3</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>53222DA7-6B75-461D-9C7F-5DCD7CA3EE86</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -43,7 +112,64 @@
 			<key>type</key>
 			<string>alfred.workflow.output.clipboard</string>
 			<key>uid</key>
-			<string>9A69BCA2-265A-429A-A320-A507550197CC</string>
+			<string>44B74F2E-9673-4795-9A54-D9E85E5959AB</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>37</integer>
+				<key>hotmod</key>
+				<integer>1310720</integer>
+				<key>hotstring</key>
+				<string>L</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>4D5EEAF1-DCFD-4B8B-A181-859BCC9CD58F</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>script</key>
+				<string>query=$1
+
+#echo -n $query
+PYTHONPATH=alfred-workflow /usr/local/bin/python3 alfred-workflow/link/convert_to_hyperlink.py "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>175FE4D0-C974-432F-BAD3-658564331216</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
@@ -59,7 +185,7 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
-				<integer>103</integer>
+				<integer>0</integer>
 				<key>keyword</key>
 				<string>l</string>
 				<key>queuedelaycustom</key>
@@ -73,7 +199,7 @@
 				<key>runningsubtext</key>
 				<string></string>
 				<key>script</key>
-				<string>PYTHONPATH=alfred-workflow python alfred-workflow/timezone/timezone.py "{query}"</string>
+				<string>PYTHONPATH=alfred-workflow /usr/local/bin/python3 alfred-workflow/link/get_link.py "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -94,24 +220,146 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>63C18D63-6A32-43F4-9722-F7D358EB62AC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>transient</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>53222DA7-6B75-461D-9C7F-5DCD7CA3EE86</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>query="{query}"
+
+#echo -n $query
+
+PYTHONPATH=alfred-workflow /usr/local/bin/python3 alfred-workflow/link/remove_prefix.py "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>5B995BBC-3549-43AF-8E38-4BBFA23D9CC3</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>7608D257-7CB4-40D1-9B7C-19856F980843</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
-		<key>4E9EA5E8-532D-4F04-9FC9-F26680BC3FF7</key>
+		<key>175FE4D0-C974-432F-BAD3-658564331216</key>
 		<dict>
 			<key>xpos</key>
-			<integer>90</integer>
+			<integer>650</integer>
 			<key>ypos</key>
 			<integer>120</integer>
 		</dict>
-		<key>9A69BCA2-265A-429A-A320-A507550197CC</key>
+		<key>44B74F2E-9673-4795-9A54-D9E85E5959AB</key>
 		<dict>
 			<key>xpos</key>
-			<integer>410</integer>
+			<integer>870</integer>
 			<key>ypos</key>
 			<integer>120</integer>
+		</dict>
+		<key>4D5EEAF1-DCFD-4B8B-A181-859BCC9CD58F</key>
+		<dict>
+			<key>xpos</key>
+			<integer>140</integer>
+			<key>ypos</key>
+			<integer>120</integer>
+		</dict>
+		<key>4E9EA5E8-532D-4F04-9FC9-F26680BC3FF7</key>
+		<dict>
+			<key>xpos</key>
+			<integer>390</integer>
+			<key>ypos</key>
+			<integer>120</integer>
+		</dict>
+		<key>53222DA7-6B75-461D-9C7F-5DCD7CA3EE86</key>
+		<dict>
+			<key>xpos</key>
+			<integer>870</integer>
+			<key>ypos</key>
+			<integer>380</integer>
+		</dict>
+		<key>5B995BBC-3549-43AF-8E38-4BBFA23D9CC3</key>
+		<dict>
+			<key>xpos</key>
+			<integer>660</integer>
+			<key>ypos</key>
+			<integer>380</integer>
+		</dict>
+		<key>63C18D63-6A32-43F4-9722-F7D358EB62AC</key>
+		<dict>
+			<key>xpos</key>
+			<integer>660</integer>
+			<key>ypos</key>
+			<integer>250</integer>
+		</dict>
+		<key>7608D257-7CB4-40D1-9B7C-19856F980843</key>
+		<dict>
+			<key>xpos</key>
+			<integer>660</integer>
+			<key>ypos</key>
+			<integer>540</integer>
 		</dict>
 	</dict>
 	<key>webaddress</key>
