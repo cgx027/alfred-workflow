@@ -177,6 +177,15 @@ class TestGetLink(unittest.TestCase):
             },
             {
                 "type": "file",
+                "title": "http://prme-vsanhol-observer-10.eng.vmware.com/vsanhol-nfs-vm/vsancert_logs/INT/all-flash/6_7_0/8169922/00050223/2018-07-03_22-15-35/VMWB-INT-4-VSANI-OCERT_1588451586290937714/datalytics.json",
+                "subtitle": "datalytics.json url",
+                "arg": "http://prme-vsanhol-observer-10.eng.vmware.com/vsanhol-nfs-vm/vsancert_logs/INT/all-flash/6_7_0/8169922/00050223/2018-07-03_22-15-35/VMWB-INT-4-VSANI-OCERT_1588451586290937714/datalytics.json",
+                "icon": {
+                    "path": "icon.png"
+                }
+            },
+            {
+                "type": "file",
                 "title": "http://prme-vsanhol-observer-10.eng.vmware.com/vsanhol-nfs-vm/vsancert_logs/INT/all-flash/6_7_0/8169922/00050223/2018-07-03_22-15-35/VMWB-INT-4-VSANI-OCERT_1588451586290937714/testdata.json",
                 "subtitle": "testdata.json url",
                 "arg": "http://prme-vsanhol-observer-10.eng.vmware.com/vsanhol-nfs-vm/vsancert_logs/INT/all-flash/6_7_0/8169922/00050223/2018-07-03_22-15-35/VMWB-INT-4-VSANI-OCERT_1588451586290937714/testdata.json",

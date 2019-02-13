@@ -27,6 +27,7 @@ def nfs_handler(link, text):
     if cert_log_path:
         test_data_path = os.path.join(cert_log_path, 'testdata.json')
         test_summary_path = os.path.join(cert_log_path, 'testsummary.html')
+        datalytics_path = os.path.join(cert_log_path, 'datalytics.json')
         wiki_txt_path = os.path.join(cert_log_path, 'wiki.txt')
 
         test_summary_wiki_link = '[{0} testsummary.html]'.format(test_summary_path)
@@ -46,6 +47,11 @@ def nfs_handler(link, text):
                 "title": test_data_path,
                 "subtitle": "testdata.json url",
                 "arg": test_data_path
+            },
+            {
+                "title": datalytics_path,
+                "subtitle": "datalytics.json url",
+                "arg": datalytics_path
             },
             {
                 "title": wiki_txt_path,
