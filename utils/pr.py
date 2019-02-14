@@ -41,17 +41,20 @@ def pr_handler(link, text):
     pr_num, comment_num = get_pr_number(link)
     if pr_num:
         pr_url = get_url_from_number(pr_num, comment_num)
+        pr_url_with_user_input = pr_url + ' ' + text if text else pr_url
         if comment_num:
-            wiki_link = '[{0} PR {1}#{2}]'.format(pr_url, pr_num, comment_num)
+            wiki_text = text or "{0}#{1}".format(pr_num, comment_num)
+            wiki_link = '[{0} PR {1}]'.format(pr_url, wiki_text)
             short_desc = 'PR {0}#c{1}'.format(pr_num, comment_num)
         else:
-            wiki_link = '[{0} PR {1}]'.format(pr_url, pr_num)
+            wiki_text = text or "{0}".format(pr_num)
+            wiki_link = '[{0} PR {1}]'.format(pr_url, wiki_text)
             short_desc = 'PR {0}'.format(pr_num)
         pr_links = (
             {
-                "title": pr_url,
+                "title": pr_url_with_user_input,
                 "subtitle": "full PR url",
-                "arg": pr_url
+                "arg": pr_url_with_user_input
             },
             {
                 "title": wiki_link,

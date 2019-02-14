@@ -37,7 +37,7 @@ LINK_HANDLERS = [
 
 def run(query=''):
     link = get_single_user_input(query=query, index=1)
-    text = get_single_user_input(query=query, index=2)
+    text = get_user_link_txt(query)
     list_items = process_handlers(link, text, LINK_HANDLERS)
     alfred_list = compose_alfred_list(list_items, item_composer)
     print(json.dumps(alfred_list))

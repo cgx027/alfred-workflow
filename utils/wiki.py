@@ -24,13 +24,14 @@ def wiki_handler(link, text):
     wiki_page = get_wiki_page(link)
 
     if wiki_page:
-        page_wiki_link = '[{0} {1}]'.format(link, wiki_page)
+        page_wiki_link = '[{0} {1}]'.format(link, text or wiki_page)
+        link_with_user_text = link + ' ' + text if text else link
 
         wiki_links = (
             {
-                "title": link,
+                "title": link_with_user_text,
                 "subtitle": "wiki page url",
-                "arg": link
+                "arg": link_with_user_text
             },
             {
                 "title": page_wiki_link,

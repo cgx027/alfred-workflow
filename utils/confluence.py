@@ -49,13 +49,14 @@ def confluence_handler(link, text):
 
     if space:
         space_link = os.path.join(CONF_HTTP_PREFIX, 'display', space)
-        page_wiki_link = '[{0} {1}]'.format(link, title or space)
+        link_with_user_text = link + ' ' + text if text else link
+        page_wiki_link = '[{0} {1}]'.format(link, text or title or space)
 
         confluence_links = (
             {
-                "title": link,
+                "title": link_with_user_text,
                 "subtitle": "confluence page url",
-                "arg": link
+                "arg": link_with_user_text
             },
             {
                 "title": page_wiki_link,

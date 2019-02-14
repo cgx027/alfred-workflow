@@ -156,7 +156,7 @@ class TestGetLink(unittest.TestCase):
         ]
 
         result = get_run_result(conf_full_pages)
-        # print(json.dumps(result, indent=4))
+        print(json.dumps(result, indent=4))
         self.assertEqual(result, expected_result_pages)
         
         result = get_run_result(conf_full_display)

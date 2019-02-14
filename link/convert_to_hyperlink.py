@@ -29,7 +29,7 @@ def get_text_from_link(link):
         return 'link'
 
 def run(query=''):
-    link = get_single_user_input(query)
+    link = get_single_user_input(query, index=1)
     all_input = get_all_user_input(query)
 
     # less than 2 input and it's not a hyperlink
@@ -43,9 +43,12 @@ def run(query=''):
         set_clipboard_data(all_input.encode('utf-8'))
         return 'text', all_input, None
     else:
-        link_text = get_text_from_link(link)
-        if not link_text:
-            link_text = get_text_from_user_input(query)
+        user_input = get_user_link_txt(query)
+        # use user_input if any
+        if user_input:
+            link_text = user_input
+        else:
+            link_text = get_text_from_link(link)
         if not link_text:
             # use default
             link_text = 'link'
