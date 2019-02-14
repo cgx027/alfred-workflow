@@ -13,7 +13,11 @@ from link.default import *
 def process_handlers(link, text, handlers):
     items = []
     for handler in handlers:
-        items.extend(handler(link, text))
+        handler_result = handler(link, text)
+        if handler_result:
+            items.extend(handler_result)
+            # stop here if a handler is hit
+            return items
 
     return items
 

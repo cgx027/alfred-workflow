@@ -257,7 +257,7 @@ class TestGetLink(unittest.TestCase):
             {
                 "type": "file",
                 "title": "google.com",
-                "subtitle": "page url",
+                "subtitle": "default page base name",
                 "arg": "google.com",
                 "icon": {
                     "path": "icon.png"
@@ -265,13 +265,40 @@ class TestGetLink(unittest.TestCase):
             },
             {
                 "type": "file",
+                "title": "google.com google",
+                "subtitle": "default page url",
+                "arg": "google.com google",
+                "icon": {
+                    "path": "icon.png"
+                }
+            },
+            {
+                "type": "file",
+                "title": "google.com google.com",
+                "subtitle": "default page url with base name",
+                "arg": "google.com google.com",
+                "icon": {
+                    "path": "icon.png"
+                }
+            },
+            {
+                "type": "file",
                 "title": "[google.com google]",
-                "subtitle": "page wiki txt",
+                "subtitle": "default page wiki txt",
                 "arg": "[google.com google]",
                 "icon": {
                     "path": "icon.png"
                 }
-            }
+            },
+            {
+                "type": "file",
+                "title": "[google.com google.com]",
+                "subtitle": "default page wiki txt with base name",
+                "arg": "[google.com google.com]",
+                "icon": {
+                    "path": "icon.png"
+                }
+            },
         ]
         result = get_run_result(link)
         # print(json.dumps(result, indent=4))
