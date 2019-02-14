@@ -21,7 +21,7 @@ def nfs_get_text_from_link(link):
         return os.path.basename(link)
 
 def nfs_handler(link, text):
-    nfs_links = ()
+    nfs_links = []
     cert_log_path = get_cert_base_link(link)
 
     if cert_log_path:
@@ -29,10 +29,9 @@ def nfs_handler(link, text):
         test_summary_path = os.path.join(cert_log_path, 'testsummary.html')
         datalytics_path = os.path.join(cert_log_path, 'datalytics.json')
         wiki_txt_path = os.path.join(cert_log_path, 'wiki.txt')
-
         test_summary_wiki_link = '[{0} testsummary.html]'.format(test_summary_path)
 
-        nfs_links = (
+        nfs_links = [ 
             {
                 "title": test_summary_path,
                 "subtitle": "testsummary.html url",
@@ -63,6 +62,22 @@ def nfs_handler(link, text):
                 "subtitle": "testsummary.html wiki link",
                 "arg": test_summary_wiki_link
             },
-        )
-    
+        ]
+
+        if text:
+            page_wiki_link = '[{0} {1}]'.format(link, text)
+            link_with_user_text = link + ' ' + text
+            nfs_links.extend([
+                {
+                    "title": link_with_user_text,
+                    "subtitle": "wiki page url",
+                    "arg": link_with_user_text
+                },
+                {
+                    "title": page_wiki_link,
+                    "subtitle": "wiki page wiki txt",
+                    "arg": page_wiki_link
+                },
+            ])
+
     return nfs_links
