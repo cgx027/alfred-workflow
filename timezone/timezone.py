@@ -11,11 +11,12 @@ CITIES = {
         "abbr": "SH"
     },
     "palo alto": {
-        "timezone": -8,
+        # "timezone": -8, # winter time
+        "timezone": -7, # summer time
         "abbr": "PA"
     }
 }
-PA_SH_HOUR_DELTA = 16
+# PA_SH_HOUR_DELTA = 16
 TIME_FORMAT = "%b/%d %H:%M"
 HOURS_AHEAD = -4
 HOURS_FORWARD = 20
