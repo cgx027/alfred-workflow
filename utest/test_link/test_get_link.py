@@ -1,7 +1,7 @@
 import unittest
 import mock
 import json
-# from utest.helper import (write_json, read_json, remove_file)
+from utest.helper import (has_same_keys_in_object_list)
 from link.get_link import run
 
 def get_run_result(query):
@@ -156,7 +156,7 @@ class TestGetLink(unittest.TestCase):
         ]
 
         result = get_run_result(conf_full_pages)
-        print(json.dumps(result, indent=4))
+        # print(json.dumps(result, indent=4))
         self.assertEqual(result, expected_result_pages)
         
         result = get_run_result(conf_full_display)
@@ -219,11 +219,21 @@ class TestGetLink(unittest.TestCase):
                 "icon": {
                     "path": "icon.png"
                 }
-            }
+            },
+            {
+                "type": "file",
+                "title": "http://prme-vsanhol-observer-10.eng.vmware.com/vsanhol-nfs-vm/vsancert_logs/INT/all-flash/6_7_0/8169922/00050223/2018-07-03_22-15-35/VMWB-INT-4-VSANI-OCERT_1588451586290937714/testdata.json",
+                "subtitle": "original link",
+                "arg": "http://prme-vsanhol-observer-10.eng.vmware.com/vsanhol-nfs-vm/vsancert_logs/INT/all-flash/6_7_0/8169922/00050223/2018-07-03_22-15-35/VMWB-INT-4-VSANI-OCERT_1588451586290937714/testdata.json",
+                "icon": {
+                    "path": "icon.png"
+                },
+            },
         ]
         result = get_run_result(link)
-        # print(json.dumps(result, indent=4))
-        self.assertEqual(result, expected_result)
+        self.assertEqual(has_same_keys_in_object_list(result, expected_result, 'subtitle'), True)
+        self.assertEqual(has_same_keys_in_object_list(result, expected_result, 'arg'), True)
+        self.assertEqual(has_same_keys_in_object_list(result, expected_result, 'title'), True)
     
     def test_run_wiki(self):
         wiki_link = "https://wiki.eng.vmware.com/VSANCertification/VSANAnalytics/TestInfo"
@@ -303,4 +313,3 @@ class TestGetLink(unittest.TestCase):
         result = get_run_result(link)
         # print(json.dumps(result, indent=4))
         self.assertEqual(result, expected_result)
-        

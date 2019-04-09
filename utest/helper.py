@@ -42,3 +42,15 @@ def remove_file(file_name):
     except:
         # ignore errors
         pass
+
+def has_same_keys_in_object_list(result, expected_results, key):
+    ''' check if two list of objects have the same keys '''
+    try:
+        keys = [item[key] for item in result]
+        keys_expected = [item[key] for item in expected_results]
+        keys.sort()
+        keys_expected.sort()
+    except:
+        return False
+
+    return keys == keys_expected

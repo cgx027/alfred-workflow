@@ -62,6 +62,11 @@ def nfs_handler(link, text):
                 "subtitle": "testsummary.html wiki link",
                 "arg": test_summary_wiki_link
             },
+            {
+                "title": link,
+                "subtitle": "original link",
+                "arg": link
+            },
         ]
 
         if text:
